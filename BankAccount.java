@@ -9,12 +9,17 @@ public class BankAccount {
     password = pass;
   }
 
-  public getBalance() {
+  public double getBalance() {
     return balance;
   }
 
-  public getAccountID() {
+  public int getAccountID() {
     return accountID;
+  }
+
+  //extra get password method
+  public String getPassword() {
+    return password;
   }
 
   public void setPassword(String newpass) {
@@ -42,5 +47,5 @@ public class BankAccount {
       return false;
     }
   }
-  
+
 }
