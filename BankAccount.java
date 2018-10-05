@@ -1,9 +1,9 @@
 public class BankAccount {
   private double balance;
-  private int accountID;
+  private double accountID;
   private String password;
 
-  public BankAccount(int accID, double bal, String pass) {
+  public BankAccount(double bal, double accID, String pass) {
     balance = bal;
     accountID = accID;
     password = pass;
@@ -13,7 +13,7 @@ public class BankAccount {
     return balance;
   }
 
-  public int getAccountID() {
+  public double getAccountID() {
     return accountID;
   }
 
@@ -27,12 +27,12 @@ public class BankAccount {
   }
 
   public String toString() {
-    return accountID + "\t" + password;
+    return "ID " + accountID + "\t" + "Bal " + balance;
   }
 
   public boolean deposit(double amount) {
     if (amount >= 0) {
-      balance += amount;
+      balance = balance + amount;
       return true;
     } else {
       return false;
@@ -41,11 +41,31 @@ public class BankAccount {
 
   public boolean withdraw(double amount) {
     if (balance >= amount) {
-      balance -= amount;
+      balance = balance - amount;
       return true;
     } else {
       return false;
     }
   }
 
+  private boolean authenticate(String password) {
+    if (this.password == password) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public boolean transferTo(BankAccount other, double amount, String password){
+    if (amount < 0 || this.balance < amount) {
+      return false;
+    }
+    if (this.authenticate(password)) {
+        this.withdraw(amount);
+        other.deposit(amount);
+      } else {
+      return false;
+    }
+   return true;
+  }
 }
